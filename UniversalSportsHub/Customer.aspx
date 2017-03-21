@@ -1,40 +1,35 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="UniversalSportsHub._Default" %>
+﻿<%@ Page Title="Customer" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Customer.aspx.cs" Inherits="UniversalSportsHub.Customer" %>
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>Universal Sports Hub</h1>
-        <p class="lead">Welcome to Universal Sports Hub</p>
-    </div>
-
-    <div class="row">
+   
+    <div class="row" style="padding-top:20px;">
         <div class="col-md-4">
-            <h2>Customer Details</h2>
-
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM &quot;ACTIVITY&quot; WHERE &quot;ACT_ID&quot; = :original_ACT_ID AND ((&quot;ACT_NAME&quot; = :original_ACT_NAME) OR (&quot;ACT_NAME&quot; IS NULL AND :original_ACT_NAME IS NULL))" InsertCommand="INSERT INTO &quot;ACTIVITY&quot; (&quot;ACT_ID&quot;, &quot;ACT_NAME&quot;) VALUES (:ACT_ID, :ACT_NAME)" OldValuesParameterFormatString="original_{0}" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT * FROM &quot;ACTIVITY&quot;" UpdateCommand="UPDATE &quot;ACTIVITY&quot; SET &quot;ACT_NAME&quot; = :ACT_NAME WHERE &quot;ACT_ID&quot; = :original_ACT_ID AND ((&quot;ACT_NAME&quot; = :original_ACT_NAME) OR (&quot;ACT_NAME&quot; IS NULL AND :original_ACT_NAME IS NULL))">
-                <DeleteParameters>
-                    <asp:Parameter Name="original_ACT_ID" Type="String" />
-                    <asp:Parameter Name="original_ACT_NAME" Type="String" />
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:Parameter Name="ACT_ID" Type="String" />
-                    <asp:Parameter Name="ACT_NAME" Type="String" />
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="ACT_NAME" Type="String" />
-                    <asp:Parameter Name="original_ACT_ID" Type="String" />
-                    <asp:Parameter Name="original_ACT_NAME" Type="String" />
-                </UpdateParameters>
-            </asp:SqlDataSource>
-            
-            
-        <%--<asp:Label ID="lblfirstName" runat="server" Text="Label">First Name</asp:Label>
-            <asp:TextBox ID="TextFirstName" runat="server"></asp:TextBox>
+            <h3>Enter New Customer Here:</h3>
             <br />
-            <asp:Label ID="lblLastName" runat="server" Text="Label">LastName</asp:Label>
-            <asp:TextBox ID="TextLastName" runat="server"></asp:TextBox>
-            <br /><br />
-            <asp:Button ID="btnSave" runat="server" Text="Save Details" OnClick="btnSave_Click" />--%>
+            <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" CellPadding="4" DataKeyNames="CUST_ID" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" Height="50px" Width="125px">
+                <AlternatingRowStyle BackColor="White" />
+                <CommandRowStyle BackColor="#C5BBAF" Font-Bold="True" />
+                <EditRowStyle BackColor="#7C6F57" />
+                <FieldHeaderStyle BackColor="#D0D0D0" Font-Bold="True" />
+                <Fields>
+                    <asp:BoundField DataField="CUST_ID" HeaderText="CUST_ID" ReadOnly="True" SortExpression="CUST_ID" />
+                    <asp:BoundField DataField="FIRST_NAME" HeaderText="FIRST_NAME" SortExpression="FIRST_NAME" />
+                    <asp:BoundField DataField="LAST_NAME" HeaderText="LAST_NAME" SortExpression="LAST_NAME" />
+                    <asp:BoundField DataField="ADDRESS" HeaderText="ADDRESS" SortExpression="ADDRESS" />
+                    <asp:BoundField DataField="MEMBERSHIP_TYPE" HeaderText="MEMBERSHIP_TYPE" SortExpression="MEMBERSHIP_TYPE" />
+                    <asp:BoundField DataField="DOB" HeaderText="DOB" SortExpression="DOB" />
+                    <asp:CommandField ShowInsertButton="True" />
+                </Fields>
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+            </asp:DetailsView>
+        </div>
+       <div class="col-md-4">
+       
             <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="CUST_ID" DataSourceID="SqlDataSource2" EmptyDataText="There are no data records to display." ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
@@ -78,10 +73,10 @@
                     <asp:Parameter Name="CUST_ID" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <hr />
+          
             
         </div>
-       
+        
     </div>
 
 </asp:Content>
